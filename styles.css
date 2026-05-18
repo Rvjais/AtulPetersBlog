@@ -240,65 +240,6 @@ body {
     background: #d35400;
 }
 
-/* Categories Section */
-.categories-section {
-    background: var(--white);
-    padding: 40px 20px;
-    margin-top: -20px;
-}
-
-.categories-container {
-    max-width: 1400px;
-    margin: 0 auto;
-}
-
-.categories-section h2 {
-    text-align: center;
-    color: var(--primary);
-    font-size: 28px;
-    margin-bottom: 30px;
-}
-
-.category-grid {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-    gap: 20px;
-}
-
-.category-card {
-    background: linear-gradient(135deg, var(--primary) 0%, var(--primary-light) 100%);
-    color: var(--white);
-    padding: 25px;
-    border-radius: 12px;
-    text-align: center;
-    cursor: pointer;
-    transition: transform 0.3s, box-shadow 0.3s;
-}
-
-.category-card:hover {
-    transform: translateY(-5px);
-    box-shadow: 0 10px 30px rgba(0,0,0,0.2);
-}
-
-.category-card i {
-    font-size: 36px;
-    margin-bottom: 15px;
-    display: block;
-}
-
-.category-card h3 {
-    font-size: 16px;
-    margin-bottom: 8px;
-}
-
-.category-card span {
-    font-size: 13px;
-    opacity: 0.9;
-    background: rgba(255,255,255,0.2);
-    padding: 4px 12px;
-    border-radius: 20px;
-}
-
 /* Main Content */
 .main-content {
     max-width: 1400px;

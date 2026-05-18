@@ -23,12 +23,10 @@ const blogGrid = document.getElementById('blogGrid');
 const pagination = document.getElementById('pagination');
 const searchInput = document.getElementById('searchInput');
 const categoryFilter = document.getElementById('categoryFilter');
-const categoryGrid = document.getElementById('categoryGrid');
 const tagsCloud = document.getElementById('tagsCloud');
 
 // Initialize
 document.addEventListener('DOMContentLoaded', () => {
-    renderCategories();
     renderTagsCloud();
     renderBlogPosts();
     setupEventListeners();
@@ -100,25 +98,6 @@ function applyFilters() {
     });
 
     renderBlogPosts();
-}
-
-// Render categories section
-function renderCategories() {
-    if (!categoryGrid) return;
-
-    // Count posts per category
-    const counts = {};
-    postsData.forEach(post => {
-        counts[post.category] = (counts[post.category] || 0) + 1;
-    });
-
-    categoryGrid.innerHTML = Object.entries(categoryNames).map(([key, value]) => `
-        <div class="category-card" onclick="filterByCategory('${key}')">
-            <i class="fas ${value.icon}"></i>
-            <h3>${value.name}</h3>
-            <span>${counts[key] || 0} Articles</span>
-        </div>
-    `).join('');
 }
 
 // Render tags cloud in sidebar
