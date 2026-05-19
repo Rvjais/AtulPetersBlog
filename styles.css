@@ -304,15 +304,6 @@ body {
     width: 100%;
     height: 100%;
     object-fit: cover;
-    display: block;
-}
-    justify-content: center;
-}
-
-.blog-card-image img {
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
 }
 
 .blog-card-image .placeholder-icon {
@@ -337,6 +328,7 @@ body {
     flex: 1;
     display: flex;
     flex-direction: column;
+    min-height: 180px;
 }
 
 .blog-card-title {
@@ -360,6 +352,7 @@ body {
     -webkit-line-clamp: 3;
     -webkit-box-orient: vertical;
     overflow: hidden;
+    flex-grow: 1;
 }
 
 .blog-card-meta {
