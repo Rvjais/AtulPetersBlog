@@ -202,9 +202,10 @@ body {
     font-weight: 500;
 }
 
-.category-select {
+.category-select,
+.sort-select {
     flex: 1;
-    max-width: 250px;
+    max-width: 200px;
     padding: 15px 20px;
     border: 2px solid var(--border);
     border-radius: 30px;
@@ -212,6 +213,19 @@ body {
     background: var(--white);
     cursor: pointer;
     outline: none;
+    min-width: 160px;
+}
+
+.sort-select {
+    max-width: 180px;
+}
+
+.search-controls {
+    display: flex;
+    align-items: center;
+    gap: 15px;
+    justify-content: center;
+    flex-wrap: wrap;
 }
 
 .cta-banner {
@@ -356,12 +370,18 @@ body {
     color: var(--text-light);
     border-top: 1px solid var(--bg-light);
     padding-top: 15px;
+    margin-top: auto;
 }
 
 .blog-card-meta span {
     display: flex;
     align-items: center;
     gap: 5px;
+}
+
+.blog-card-meta .date {
+    color: var(--text-light);
+    font-size: 11px;
 }
 
 .read-more {

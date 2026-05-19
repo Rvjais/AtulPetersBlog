@@ -15,18 +15,23 @@ const categoryNames = {
 let currentPage = 1;
 const postsPerPage = 12;
 let filteredPosts = [...postsData];
+let sortedPosts = [];
 let currentCategory = '';
 let searchQuery = '';
+let currentSort = 'newest';
 
 // DOM elements
 const blogGrid = document.getElementById('blogGrid');
 const pagination = document.getElementById('pagination');
 const searchInput = document.getElementById('searchInput');
 const categoryFilter = document.getElementById('categoryFilter');
+const sortFilter = document.getElementById('sortFilter');
 const tagsCloud = document.getElementById('tagsCloud');
 
 // Initialize
 document.addEventListener('DOMContentLoaded', () => {
+    // Sort posts by date initially (newest first)
+    sortPostsByDate('newest');
     renderTagsCloud();
     renderBlogPosts();
     setupEventListeners();
@@ -39,6 +44,9 @@ function setupEventListeners() {
 
     // Category filter dropdown
     categoryFilter?.addEventListener('change', handleCategoryChange);
+
+    // Sort filter dropdown
+    sortFilter?.addEventListener('change', handleSortChange);
 }
 
 // Debounce helper
@@ -68,6 +76,28 @@ function handleCategoryChange(e) {
     applyFilters();
 }
 
+// Handle sort change
+function handleSortChange(e) {
+    currentSort = e.target.value;
+    sortPostsByDate(currentSort);
+    currentPage = 1;
+    applyFilters();
+}
+
+// Sort posts by date
+function sortPostsByDate(order) {
+    sortedPosts = [...postsData].sort((a, b) => {
+        const dateA = a.date ? new Date(a.date) : new Date(0);
+        const dateB = b.date ? new Date(b.date) : new Date(0);
+
+        if (order === 'newest') {
+            return dateB - dateA; // Descending (newest first)
+        } else {
+            return dateA - dateB; // Ascending (oldest first)
+        }
+    });
+}
+
 // Filter by category (from category cards or tags)
 function filterByCategory(category) {
     currentCategory = category;
@@ -80,7 +110,7 @@ function filterByCategory(category) {
 
 // Apply all filters
 function applyFilters() {
-    filteredPosts = postsData.filter(post => {
+    filteredPosts = sortedPosts.filter(post => {
         // Category filter
         if (currentCategory && post.category !== currentCategory) {
             return false;
@@ -98,6 +128,22 @@ function applyFilters() {
     });
 
     renderBlogPosts();
+}
+
+// Format date for display
+function formatDate(dateStr) {
+    if (!dateStr || dateStr === 'NULL') return '';
+    try {
+        const d = new Date(dateStr);
+        if (isNaN(d.getTime())) return '';
+        return d.toLocaleDateString('en-US', {
+            year: 'numeric',
+            month: 'long',
+            day: 'numeric'
+        });
+    } catch (e) {
+        return '';
+    }
 }
 
 // Render tags cloud in sidebar
@@ -162,7 +208,7 @@ function renderBlogPosts() {
                 <h3 class="blog-card-title">${post.title}</h3>
                 <p class="blog-card-excerpt">${post.excerpt}</p>
                 <div class="blog-card-meta">
-                    <span><i class="fas fa-tag"></i> ${categoryNames[post.category]?.name || post.category}</span>
+                    <span><i class="fas fa-calendar-alt"></i> ${formatDate(post.date)}</span>
                     <a href="posts/post-${post.id}.html" class="read-more">Read More <i class="fas fa-arrow-right"></i></a>
                 </div>
             </div>
