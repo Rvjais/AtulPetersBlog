@@ -81,7 +81,7 @@ function sortPostsByDate() {
 function filterByCategory(category) {
     currentCategory = category;
     if (categoryFilter) categoryFilter.value = category;
-    searchInput.value = '';
+    if (searchInput) searchInput.value = '';
     searchQuery = '';
     currentPage = 1;
     applyFilters();
